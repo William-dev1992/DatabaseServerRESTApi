@@ -1,28 +1,32 @@
-import { IUsersRepository } from "../../repositories/IUserRespository";
 import sqlite3 from "sqlite3";
-// import { jw } from "jsonwebtoken"
 
 export class GetUserUseCase {
   constructor(
+    private db = new sqlite3.Database('C:\Users\willi\OneDrive\Documentos\GitHub\DatabaseServerRESTApi\src\db\Users.db')
   ) { }
 
   async execute({ email }) {
-    let user = null;
+    const query = 'SELECT * FROM USERS WHERE USERS.EMAIL = ?';
 
-    const db = new sqlite3.Database('./db/Users.sqlite');
-
-    db.get(`SELECT * FROM USERS WHERE users.email = ? `, [email], (error, row) => {
-      if (error) {
-        return console.log(error);
-      }
-      user = row
-      return
-    });
-
-    if (!user) {
-      console.error('User not found.')
+    try {
+      const user = await this.getPromise(query, email);
+      return user
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
+  }
 
-    return user
+  getPromise(query: string, param: string) {
+    return new Promise((resolve, reject) => {
+
+      this.db.get(query, param, (err, row) => {
+        if (err) {
+          reject(err);
+        }
+
+        resolve(row);
+      })
+    })
   }
 }

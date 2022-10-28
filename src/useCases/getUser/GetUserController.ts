@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import { GetUserUseCase } from './GetUserUseCase'
 
 export class GetUserController {

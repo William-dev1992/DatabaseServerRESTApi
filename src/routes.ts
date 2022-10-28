@@ -3,7 +3,7 @@ import { loginController } from "./useCases/login";
 
 const router = Router()
 
-router.get('/login', (request, response) => {
+router.post('/login', (request, response) => {
   
   return loginController.handle(request, response)
 })

@@ -15,7 +15,7 @@ export class LoginController {
         password
       })
 
-      return response.status(201).send(userToken);
+      return response.status(201).send({apiToken: userToken});
     } catch (err) {
       return response.status(400).json({
         message: 'Invalid user information.'
