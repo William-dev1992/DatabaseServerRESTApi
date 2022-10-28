@@ -5,11 +5,11 @@ export class GetUserUseCase {
     private db = new sqlite3.Database('C:\Users\willi\OneDrive\Documentos\GitHub\DatabaseServerRESTApi\src\db\Users.db')
   ) { }
 
-  async execute({ email }) {
-    const query = 'SELECT * FROM USERS WHERE USERS.EMAIL = ?';
+  async execute({ param, name }): Promise<Record<string, string>> {
+    const query = `SELECT * FROM USERS WHERE USERS.${name} = ?`;
 
     try {
-      const user = await this.getPromise(query, email);
+      const user = await this.getPromise(query, param);
       return user
     } catch (error) {
       console.error(error);
@@ -17,7 +17,7 @@ export class GetUserUseCase {
     }
   }
 
-  getPromise(query: string, param: string) {
+  getPromise(query: string, param: string): Promise<Record<string, string>> {
     return new Promise((resolve, reject) => {
 
       this.db.get(query, param, (err, row) => {

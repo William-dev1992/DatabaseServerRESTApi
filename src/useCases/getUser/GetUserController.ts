@@ -5,9 +5,10 @@ export class GetUserController {
     private GetUserUseCase: GetUserUseCase
   ) { }
 
-  async handle(email: string): Promise<Record<string, string>> {
+  async handle(param: string, name: string): Promise<Record<string, string>> {
     const user = await this.GetUserUseCase.execute({
-      email
+      param, 
+      name
     })
 
     return user

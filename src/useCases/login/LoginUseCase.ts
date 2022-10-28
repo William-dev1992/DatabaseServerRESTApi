@@ -1,12 +1,10 @@
 import { getUserController } from "../getUser";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
+import { ILoginDTO } from "./LoginDTO";
 
 export class LoginUseCase {
-  constructor (
-  ) {}
-
-  async execute({email, password}) {
-    const user = await getUserController.handle(email)
+  async execute({email, password}: ILoginDTO): Promise<string> {
+    const user = await getUserController.handle(email, "EMAIL")
     
     if (user.PASSWORD !== password) {
       throw console.error('Senha inválida')
