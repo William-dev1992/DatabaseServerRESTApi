@@ -4,7 +4,6 @@ import { queryController } from "./useCases/query";
 import { registerController } from "./useCases/register";
 import { consultController } from "./useCases/consult";
 import { AuthorizeUser } from "./middlewares/Authorization";
-import { app } from "./app";
 
 const router = Router();
 
@@ -17,7 +16,7 @@ router.post("/login", (request, response) => {
   return loginController.handle(request, response);
 });
 
-// app.use(authorizeUser);
+// router.use(authorizeUser);
 
 router.post("/query", (request, response) => {
   return queryController.handle(request, response);
@@ -27,7 +26,7 @@ router.post("/register", (request, response) => {
   return registerController.handle(request, response);
 });
 
-router.post("/consult/:id", (request, response) => {
+router.get("/consult/:id", (request, response) => {
   return consultController.handle(request, response);
 });
 

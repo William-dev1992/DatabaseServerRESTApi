@@ -1,20 +1,22 @@
-import { Request, Response } from 'express';
-import { ConsultUseCase } from './ConsultUseCase';
-import jwt, { JwtPayload } from 'jsonwebtoken';
-import { getUserController } from '../getUser';
-import { AuthorizeUser } from '../../middlewares/authorization';
+import { Request, Response } from "express";
+import { ConsultUseCase } from "./ConsultUseCase";
 
 export class ConsultController {
-  constructor(
-    private ConsultUseCase: ConsultUseCase
-  ) {}
+  constructor(private ConsultUseCase: ConsultUseCase) {}
 
-  handle(request: Request, response: Response): void {
-    // const { id } = request.params;
+  async handle(
+    request: Request,
+    response: Response
+  ): Promise<Response<any, Record<string, any>>> {
+    try {
+      const { id } = request.params;
+      const result = await this.ConsultUseCase.execute(id);
 
-    // Chamar UseCase.
-    // this.RegisterUseCase.execute(command)
-
-    return console.log('registrado na fila')
-  } 
+      return response.status(200).json(result);
+    } catch (err) {
+      return response.status(400).json({
+        message: err,
+      });
+    }
+  }
 }
