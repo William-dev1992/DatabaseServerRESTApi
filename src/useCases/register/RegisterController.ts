@@ -1,17 +1,14 @@
-import { Request, Response } from 'express';
-import { RegisterUseCase } from './RegisterUseCase';
+import { Request, Response } from "express";
+import { RegisterUseCase } from "./RegisterUseCase";
 
 export class RegisterController {
-  constructor(
-    private RegisterUseCase: RegisterUseCase
-  ) {}
+  constructor(private RegisterUseCase: RegisterUseCase) {}
 
   handle(request: Request, response: Response): void {
-    // const command = request.body;
+    const command = request.body;
 
-    // Chamar UseCase.
-    // this.RegisterUseCase.execute(command)
+    this.RegisterUseCase.execute(command);
 
-    return console.log('registrado na fila')
-  } 
+    return console.log("registrado na fila");
+  }
 }

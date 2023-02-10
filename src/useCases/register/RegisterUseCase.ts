@@ -1,5 +1,11 @@
+import { producer } from "../../kafkaConnection/connection";
+
 export class RegisterUseCase {
   async execute(command: Record<string, any>) {
-    //Inserir comando no sistema de fila.
+    await producer.connect();
+    await producer.send({
+      topic: "server-events",
+      messages: [{ value: JSON.stringify(command) }],
+    });
   }
 }
