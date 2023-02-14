@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { LoginUseCase } from "./LoginUseCase";
-import { run } from "../../kafkaConnection/connection";
 
 export class LoginController {
   constructor(private LoginUseCase: LoginUseCase) {}
