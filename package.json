@@ -5,7 +5,7 @@
   "author": "William David Ferreira da Silva Lopes <williamferreira132003@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only --exit-child --watch src src/server.ts",
+    "start": "node --loader ts-node/esm/transpile-only --es-module-specifier-resolution=node ./src/server.ts",
     "fillData": "node src/dataBaseConnection.js"
   },
   "dependencies": {

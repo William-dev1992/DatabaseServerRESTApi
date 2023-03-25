@@ -10,7 +10,11 @@ export class ConsultUseCase {
     await consumer.subscribe({ topic, fromBeginning: true });
     await consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
-        result.push(message.value);
+        console.log({
+          partition,
+          offset: message.offset,
+          value: message.value.toString(),
+        });
       },
     });
 

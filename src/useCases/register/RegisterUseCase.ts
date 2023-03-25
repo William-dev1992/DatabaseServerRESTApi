@@ -5,14 +5,18 @@ export class RegisterUseCase {
   async execute(command: Record<string, any>): Promise<void> {
     command.id = idGenerator();
 
-    await producer.connect();
-    await producer.send({
-      topic: "server-events",
-      messages: [
-        {
-          value: JSON.stringify(command),
-        },
-      ],
-    });
+    try {
+      await producer.connect();
+      await producer.send({
+        topic: "server-events",
+        messages: [
+          {
+            value: JSON.stringify(command),
+          },
+        ],
+      });
+    } catch {
+      console.error("fufeu");
+    }
   }
 }

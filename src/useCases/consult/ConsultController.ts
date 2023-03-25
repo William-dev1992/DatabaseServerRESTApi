@@ -12,6 +12,8 @@ export class ConsultController {
       const { id } = request.params;
       const result = await this.ConsultUseCase.execute(id);
 
+      console.log(`RESULT: ${result.length}`);
+
       return response.status(200).json(result);
     } catch (err) {
       return response.status(400).json({
