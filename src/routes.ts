@@ -4,6 +4,7 @@ import { queryController } from "./useCases/query";
 import { registerController } from "./useCases/register";
 import { consultController } from "./useCases/consult";
 import { AuthorizeUser } from "./middlewares/Authorization";
+import { createUserController } from "./useCases/createUser";
 
 const router = Router();
 
@@ -16,7 +17,11 @@ router.post("/login", (request, response) => {
   return loginController.handle(request, response);
 });
 
-// router.use(authorizeUser);
+router.post("/createUser", (request, response) => {
+  return createUserController.handle(request, response);
+});
+
+router.use(authorizeUser);
 
 router.post("/query", (request, response) => {
   return queryController.handle(request, response);

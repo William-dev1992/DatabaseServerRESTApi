@@ -5,7 +5,10 @@
     "allowJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src"]
+    }
   },
-  "include": ["src/**/*.ts", "src/dataBaseConnection.cjss"]
+  "include": ["src/**/*.ts"]
 }

@@ -1,5 +1,5 @@
-import { idGenerator } from "../../helpers/idGenerator";
-import { producer } from "../../kafkaConnection/connection";
+import { idGenerator } from "@/helpers/idGenerator";
+import { producer } from "@/kafkaConnection/connection";
 
 export class RegisterUseCase {
   async execute(command: Record<string, any>): Promise<void> {
@@ -16,7 +16,7 @@ export class RegisterUseCase {
         ],
       });
     } catch {
-      console.error("fufeu");
+      console.error("Error registering information.");
     }
   }
 }

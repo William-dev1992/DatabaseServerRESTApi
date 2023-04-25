@@ -1,11 +1,9 @@
-import express from 'express'
-import { router } from './routes'
-import env from "dotenv"
+import express from "express";
+import { router } from "./routes";
 
-const app = express()
+const app = express();
 
-app.use(express.json())
-env.config()
-app.use(router)
+app.use(express.json());
+app.use(router);
 
-export { app }
+export { app };

@@ -8,10 +8,13 @@ export class LoginController {
     const { email, password } = request.body;
 
     try {
-      const userToken = await this.LoginUseCase.execute({
-        email,
-        password,
-      });
+      const userToken = await this.LoginUseCase.execute(
+        {
+          email,
+          password,
+        },
+        response
+      );
 
       return response.status(201).send({ apiToken: userToken });
     } catch (err) {

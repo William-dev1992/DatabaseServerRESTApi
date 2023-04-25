@@ -1,4 +1,4 @@
-import { consumer } from "../../kafkaConnection/connection";
+import { consumer } from "@/kafkaConnection/connection";
 
 export class ConsultUseCase {
   async execute(command: string) {

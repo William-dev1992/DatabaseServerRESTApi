@@ -1,5 +1,5 @@
-import { idGenerator } from "../../helpers/idGenerator";
-import { producer } from "../../kafkaConnection/connection";
+import { idGenerator } from "@/helpers/idGenerator";
+import { producer } from "@/kafkaConnection/connection";
 
 export class QueryUseCase {
   async execute(query: Record<string, any>): Promise<void> {
