@@ -5,12 +5,16 @@ const DataSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  dataType: {
+    type: Number,
+    required: true,
+  },
   userId: {
     type: String,
     required: true,
   },
   data: {
-    type: String,
+    type: Object,
     required: true,
   },
   result: {

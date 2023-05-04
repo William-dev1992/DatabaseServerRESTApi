@@ -10,12 +10,13 @@ export class RegisterController {
   ): Promise<Response<any, Record<string, any>>> {
     try {
       const command = request.body;
-      await this.RegisterUseCase.execute(command);
+      const registerId = await this.RegisterUseCase.execute(command);
 
-      return response.status(200).json("Registro na fila concluído");
+      return response.status(200).json({ registerId });
     } catch (err) {
       return response.status(400).json({
-        message: err,
+        info: "Error while trying to insert item.",
+        SystemMessage: err,
       });
     }
   }
