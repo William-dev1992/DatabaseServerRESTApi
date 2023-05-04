@@ -9,8 +9,12 @@ export class RegisterController {
     response: Response
   ): Promise<Response<any, Record<string, any>>> {
     try {
-      const command = request.body;
-      const registerId = await this.RegisterUseCase.execute(command);
+      const data = request.body;
+      const { authorization } = request.headers;
+      const registerId = await this.RegisterUseCase.execute(
+        data,
+        authorization
+      );
 
       return response.status(200).json({ registerId });
     } catch (err) {

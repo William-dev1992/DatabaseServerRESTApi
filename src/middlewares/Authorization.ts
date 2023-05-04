@@ -1,7 +1,6 @@
-import { JwtPayload } from "jsonwebtoken";
 import { getUserController } from "@/useCases/getUser";
-import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
+import { decodeUserToken } from "@/helpers/decodeUserToken";
 
 export class AuthorizeUser {
   validate(request: Request, response: Response) {
@@ -11,9 +10,7 @@ export class AuthorizeUser {
       throw console.error("Não autorizado");
     }
 
-    const token = authorization.split(" ")[1];
-
-    const { id } = jwt.verify(token, process.env.JWT_PASS) as JwtPayload;
+    const id = decodeUserToken(authorization);
 
     const user = getUserController.handle("", response, id);
 

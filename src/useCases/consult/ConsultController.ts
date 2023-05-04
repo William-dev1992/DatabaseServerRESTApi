@@ -10,6 +10,11 @@ export class ConsultController {
   ): Promise<Response<any, Record<string, any>>> {
     try {
       const { id } = request.params;
+
+      if (!id) {
+        throw "Parameter ':id' is required.";
+      }
+
       const result = await this.ConsultUseCase.execute(id);
 
       return response.status(200).json(result);

@@ -1,10 +1,11 @@
 import { idGenerator } from "@/helpers/idGenerator";
 import { producer } from "@/kafkaConnection/connection";
 import { dataTypes } from "@/helpers/globalStrings";
+import { decodeUserToken } from "@/helpers/decodeUserToken";
 import Data from "@/models/Data";
 
 export class RegisterUseCase {
-  async execute(data: Record<string, any>): Promise<String> {
+  async execute(data: Record<string, any>, token: string): Promise<String> {
     data.id = idGenerator();
 
     await producer.connect();
@@ -17,12 +18,15 @@ export class RegisterUseCase {
       ],
     });
 
-    await this.insertToDatabase(data);
+    await this._insertToDatabase(data, token);
 
     return data.id;
   }
 
-  async insertToDatabase(data: Record<string, any>): Promise<void> {
+  async _insertToDatabase(
+    data: Record<string, any>,
+    token: string
+  ): Promise<void> {
     let cleanData = Object.assign({}, data);
 
     delete cleanData.id;
@@ -30,7 +34,7 @@ export class RegisterUseCase {
     const obj = {
       _id: data.id,
       dataType: dataTypes.insertion,
-      userId: "a",
+      userId: decodeUserToken(token),
       data: cleanData,
       result: "",
       status: 1,
