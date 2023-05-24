@@ -10,9 +10,10 @@ export class QueryController {
   ): Promise<Response<any, Record<string, any>>> {
     try {
       const query = request.body;
-      await this.QueryUseCase.execute(query);
+      const { authorization } = request.headers;
+      const queryId = await this.QueryUseCase.execute(query, authorization);
 
-      return response.status(200).json("Registro na fila concluído");
+      return response.status(200).json({ queryId });
     } catch (err) {
       return response.status(400).json({
         message: err,
