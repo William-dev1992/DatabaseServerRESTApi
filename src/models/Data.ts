@@ -18,7 +18,7 @@ const DataSchema = new mongoose.Schema({
     required: true,
   },
   result: {
-    type: String,
+    type: Array<Object>,
     required: false,
   },
   status: {
